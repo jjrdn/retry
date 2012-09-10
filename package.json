@@ -1,14 +1,13 @@
 {
   "name": "retry-on-error",
   "description": "Retry async operations with custom backoff strategies",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "James J. Jordan Jr. <jjrdn@styosis.com>",
   "keywords": [
     "retry",
     "backoff"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "nodeunit": "~0.7.4"
   },
@@ -22,10 +21,12 @@
     "url": "git@github.com:jjrdn/retry.git"
   },
   "homepage": "https://github.com/jjrdn/retry",
-  "licenses": [{
-    "type": "BSD",
-    "url": "https://github.com/jjrdn/retry/raw/master/LICENSE"
-  }],
+  "licenses": [
+    {
+      "type": "BSD",
+      "url": "https://github.com/jjrdn/retry/raw/master/LICENSE"
+    }
+  ],
   "engines": {
     "node": ">=0.6",
     "npm": "1"
