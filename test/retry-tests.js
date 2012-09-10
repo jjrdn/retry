@@ -46,6 +46,60 @@ function linearBackoff(factor) {
   };
 }
 
+/**
+ * noop - async no operation, just calls callback on next tick
+ *
+ */
+function noop(cb) {
+  process.nextTick(cb);
+}
+
+exports['should throw error when maxTimeout < minTimeout'] = function (test) {
+  test.expect();
+
+  test.throws(function() {
+    retry(noop, {minTimeout: 200, maxTimeout: 100});
+  });
+
+  test.done();
+};
+
+exports['should throw error when maxAttempts is negative'] = function (test) {
+  test.expect();
+
+  test.throws(function() {
+    retry(noop, {maxAttempts: -10});
+  });
+
+  test.done();
+};
+
+exports['should accept number as static backoff'] = function (test) {
+  test.expect(1);
+  var successfulExecution = 2;
+
+  var fn = retry(errorsUntil, {backoff: 100});
+
+  fn(successfulExecution, function(error, execution) {
+    test.strictEqual(successfulExecution, execution);
+    test.done();
+  });
+};
+
+exports['should throw error when backoff is negative number'] = function (test) {
+  test.expect();
+
+  test.throws(function() {
+    retry(noop, {backoff: -1000});
+  });
+
+  test.done();
+};
+
+
+
+
+
 exports['should not retry if first attempt succeeds'] = function (test) {
   test.expect(2);
 
