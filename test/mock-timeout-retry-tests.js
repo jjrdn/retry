@@ -21,18 +21,17 @@ function failOnceThenSucceed(cb) {
   cb();
 }
 
-exports['should call setTimeout with correct timeout'] = function (test) {
+exports['should call setTimeout with correct constant timeout'] = function (test) {
   test.expect(1);
 
+  var constantTimeout = 123;
+
   setTimeout = function (f, timeout) {
-    test.strictEqual(123, timeout);
+    test.strictEqual(constantTimeout, timeout);
     originalSetTimeout.apply(this, arguments);
   };
 
-  var fn = retry(failOnceThenSucceed, {timeout: 123});
+  var fn = retry(failOnceThenSucceed, { timeout: constantTimeout });
   fn(test.done);
 };
-
-
-
 
