@@ -74,11 +74,11 @@ exports['should throw error when maxAttempts is negative'] = function (test) {
   test.done();
 };
 
-exports['should accept number as static backoff'] = function (test) {
+exports['should accept number as static timeout'] = function (test) {
   test.expect(1);
   var successfulExecution = 2;
 
-  var fn = retry(errorsUntil, {backoff: 100});
+  var fn = retry(errorsUntil, {timeout: 100});
 
   fn(successfulExecution, function(error, execution) {
     test.strictEqual(successfulExecution, execution);
@@ -86,11 +86,11 @@ exports['should accept number as static backoff'] = function (test) {
   });
 };
 
-exports['should throw error when backoff is negative number'] = function (test) {
+exports['should throw error when timeout is negative number'] = function (test) {
   test.expect();
 
   test.throws(function() {
-    retry(noop, {backoff: -1000});
+    retry(noop, {timeout: -1000});
   });
 
   test.done();
