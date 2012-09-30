@@ -86,6 +86,22 @@ exports['should accept number as static timeout'] = function (test) {
   });
 };
 
+exports['should accept function as variable timeout'] = function (test) {
+  test.expect(1);
+  var successfulExecution = 2;
+
+  function myTimeout (attempts) {
+    return attempts * 5;
+  }
+
+  var fn = retry(errorsUntil, {timeout: myTimeout});
+
+  fn(successfulExecution, function(error, execution) {
+    test.strictEqual(successfulExecution, execution);
+    test.done();
+  });
+};
+
 exports['should throw error when timeout is negative number'] = function (test) {
   test.expect();
 
@@ -95,10 +111,6 @@ exports['should throw error when timeout is negative number'] = function (test) 
 
   test.done();
 };
-
-
-
-
 
 exports['should not retry if first attempt succeeds'] = function (test) {
   test.expect(2);
@@ -111,7 +123,6 @@ exports['should not retry if first attempt succeeds'] = function (test) {
     test.done();
   });
 };
-
 
 exports['should callback with success after error'] = function (test) {
   test.expect(1);
