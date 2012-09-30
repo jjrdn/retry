@@ -148,3 +148,22 @@ exports['should callback with last error after max retries all error'] = functio
   });
 };
 
+exports['should allow custom accept function'] = function (test) {
+  test.expect(1);
+
+  var responses = ['bar', 'foo'];
+  function fooThenBar(cb) {
+    cb(null, responses.pop());
+  }
+
+  var fn = retry(fooThenBar, {
+    accept: function (error, result) {
+      return result === 'bar';
+    }
+  });
+
+  fn(function(error, result) {
+    test.strictEqual('bar', result);
+    test.done();
+  });
+};
