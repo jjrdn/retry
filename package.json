@@ -1,7 +1,7 @@
 {
   "name": "retry-on-error",
   "description": "Retry async operations with custom backoff strategies",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "James J. Jordan Jr. <jjrdn@styosis.com>",
   "keywords": [
     "retry",
